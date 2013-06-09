@@ -25,7 +25,7 @@ initial begin
   $fclose(fd);
 
   //now will generate mif file
-  fd=$fopen("../../chapter7_altera/rom_init.mif","w");
+  fd=$fopen("../../hello_altera/rom_init.mif","w");
   $fdisplay(fd,"WIDTH=32;");
   $fdisplay(fd,"DEPTH=2048;");
   $fdisplay(fd,"");
