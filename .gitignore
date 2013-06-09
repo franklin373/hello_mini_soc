@@ -9,6 +9,9 @@
 *.hex
 *.bak
 *.log
+*.summary
+*.rpt
+*.done
 wlft*
 Obj/
 work/
