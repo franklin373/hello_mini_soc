@@ -1,0 +1,9 @@
+Dependencies for Project 'Hello', Target 'LPC2100': (DO NOT MODIFY !)
+F (.\Startup.s)(0x4F61A930)(--cpu ARM7TDMI -g --pd "__MICROLIB SETA 1" -I d:\Keil\ARM\RV31\INC -I d:\Keil\ARM\CMSIS\Include -I d:\Keil\ARM\Inc\Philips --list ".\Lst\Startup.lst" --xref -o ".\Obj\Startup.o" --depend ".\Obj\Startup.d")
+F (.\Retarget.c)(0x4C80BF5E)(-c --cpu ARM7TDMI -D__MICROLIB -g -O0 -I d:\Keil\ARM\RV31\INC -I d:\Keil\ARM\CMSIS\Include -I d:\Keil\ARM\Inc\Philips -o ".\Obj\retarget.o" --depend ".\Obj\retarget.d")
+I (d:\Program Files\ARM\ADSv1_2\INCLUDE\stdio.h)(0x3BEB19E6)
+I (d:\Program Files\ARM\ADSv1_2\INCLUDE\rt_misc.h)(0x3BEB19E6)
+F (.\Serial.c)(0x4F61A9C0)(-c --cpu ARM7TDMI -D__MICROLIB -g -O0 -I d:\Keil\ARM\RV31\INC -I d:\Keil\ARM\CMSIS\Include -I d:\Keil\ARM\Inc\Philips -o ".\Obj\serial.o" --depend ".\Obj\serial.d")
+F (.\Hello.c)(0x4F61A96C)(-c --cpu ARM7TDMI -D__MICROLIB -g -O0 -I d:\Keil\ARM\RV31\INC -I d:\Keil\ARM\CMSIS\Include -I d:\Keil\ARM\Inc\Philips -o ".\Obj\hello.o" --depend ".\Obj\hello.d")
+I (d:\Program Files\ARM\ADSv1_2\INCLUDE\stdio.h)(0x3BEB19E6)
+F (.\Abstract.txt)(0x4C80BF5E)()

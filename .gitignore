@@ -1,0 +1,17 @@
+*.o
+*.a
+*~
+*.out
+*.i
+*.map
+*.pbd
+*.d
+*.hex
+*.bak
+*.log
+wlft*
+Obj/
+work/
+db/
+incremental_db/
+simulation/
