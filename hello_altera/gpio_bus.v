@@ -22,7 +22,7 @@ module gpio_bus (
 
 
 
-    reg dout;
+    reg [31:0] dout;
 
     reg gpio;
 

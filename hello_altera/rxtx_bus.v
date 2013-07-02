@@ -15,7 +15,7 @@ module rxtx_bus (
     input              rst;
     input              ce;
     input              we;
-    input[2:0]         addr;
+    input[3:0]         addr;
     input[31:0]        din;
     output[31:0]       dout;
 
@@ -26,11 +26,11 @@ module rxtx_bus (
     reg                tx_vld;
     reg   [7:0]        tx_data;
 
-    reg dout;
+    reg [31:0] dout;
 
 
     rxtx 
-    #( .baud ( 115200 ),
+    #( .baud ( 115200/**90*/ ),
        .mhz  ( 25     )
      )
     u_uart (
@@ -50,17 +50,17 @@ module rxtx_bus (
     if ( rst )
         tx_vld <= 1'b0;
     else 
-        tx_vld <= ce & we & (addr==3'h4);
+        tx_vld <= ce & we & (addr==4'h4);
     	
     always @ (posedge clk or posedge rst )
     if ( rst )
         tx_data <= 8'h0;
-    else if ( ce & we & (addr==3'h4) )
+    else if ( ce & we & (addr==4'h4) )
         tx_data <= din[7:0];
     else;
 
     always @ ( * )
-    if (ce & ~we & addr==3'h0)
+    if (ce & ~we & addr==4'h0)
         dout = txrdy ? 32'h0:32'h1;
 
 endmodule			

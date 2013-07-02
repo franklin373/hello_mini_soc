@@ -17,7 +17,13 @@ add wave -group "tb_top" 	/tb/clk		\
 							/tb/rst		\
 							/tb/rom_addr	\
 							/tb/rom_data	\
-							/tb/rom_en
+							/tb/rom_en	\
+							/tb/u_arm9/cha_rf_vld  \
+							/tb/u_arm9/go_rf_vld   \
+							/tb/u_arm9/hold_en     \
+							/tb/u_arm9/int_all     \
+							/tb/u_arm9/to_rf_vld   \
+							/tb/u_arm9/wait_en
 #add wave -group "UUB_RST DUT" /top_adaptor/uub_rst_if/*
 #add wave -group "ISP1501_DUT" /top_adaptor/isp1501_if/*
 #add wave -group "UTMI DUT" /top_adaptor/utmi_if/*

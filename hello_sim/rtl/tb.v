@@ -3,7 +3,8 @@
 module tb;
 
 //parameter BINFILE = "D:/keil/Hello/Obj/hello.bin";
-parameter BINFILE = "../cpucode/hello.bin";
+//parameter BINFILE = "../cpucode/hello.bin";
+parameter BINFILE = "../../Hello_pro_cpucode/Hello/Obj/hello.bin";
 
 reg clk = 1'b0;
 always clk = #5 ~clk;

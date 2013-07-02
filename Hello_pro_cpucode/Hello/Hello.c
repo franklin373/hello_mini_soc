@@ -20,14 +20,29 @@ void busyLoop(int loop)
 	}while(iii--);
 }
 #define IOPIN          (*((volatile unsigned long *) 0xD0000000))
-#define BUSY_LOOP_TIMES (10000000)
+#define BUSY_LOOP_TIMES (10000000)/*10M about 4 sec*/
+
+extern int  sendchar(int ch); 
+int output_str(char *str)
+{
+	int i;
+	
+	for(i=0;str[i];i++){
+		sendchar(str[i]);
+	}
+	return 0;
+}
+
 /****************/
 /* main program */
 /****************/
 int main (void)  {                /* execution starts here                    */
-
+  busyLoop(BUSY_LOOP_TIMES);
+#if 0
   printf ("Hello World\n");       /* the 'printf' function call               */
-
+#else
+  output_str("Hello World\n");
+#endif
   while (1) {                          /* An embedded program does not stop and       */
   	IOPIN=0x1;
   	busyLoop(BUSY_LOOP_TIMES);

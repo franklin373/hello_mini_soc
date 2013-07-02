@@ -30,6 +30,7 @@ output       txrdy;
 /***********************************/
 reg          rx_dly;
 reg    [13:0] rx_cnt;
+reg    [13:0] tx_cnt;
 reg          data_vld;
 reg    [3:0] data_cnt;
 reg          rx_vld;
@@ -42,6 +43,7 @@ wire         txrdy;
 /***********************************/
 wire         rx_change;
 wire         rx_en;
+wire         tx_en;
 
 /***********************************/
 
@@ -65,7 +67,7 @@ assign rx_change = (rxx != rx_dly );
 always @ ( posedge clk or posedge rst )
 if ( rst )
     rx_cnt <= #`DEL 0;
-else if ( rx_change | ( rx_cnt==period ) )
+else if ( rx_change | ( rx_cnt==period-1 ) )
     rx_cnt <= #`DEL 0;
 else
     rx_cnt <= #`DEL rx_cnt + 1'b1;
@@ -104,6 +106,28 @@ if ( rst )
 else
     rx_vld <= #`DEL data_vld & rx_en & ( data_cnt==4'h9);
 
+
+
+
+
+
+/**************************************tx logic************************************************/
+
+
+
+
+
+always @ ( posedge clk or posedge rst )
+if ( rst )
+    tx_cnt <= #`DEL 0;
+else if  ( tx_cnt==period-1 ) 
+    tx_cnt <= #`DEL 0;
+else
+    tx_cnt <= #`DEL tx_cnt + 1'b1;
+
+assign tx_en = ( tx_cnt==0 );
+
+
 always @ ( posedge clk or posedge rst )
 if ( rst )
     tx_rdy_data <= #`DEL 8'b0;
@@ -111,12 +135,56 @@ else if ( tx_vld & txrdy )
     tx_rdy_data <= #`DEL tx_data;
 else;
 
+reg tran_vld_next;
+always @ (*)
+    if(tx_vld)
+        tran_vld_next=1'b1;
+    else if(tx_en & tran_cnt==4'd10)
+        tran_vld_next=1'b0;
+    else
+        tran_vld_next=tran_vld;
+
+always @ ( posedge clk or posedge rst )
+    if (rst )
+        tran_vld <= #`DEL 1'b0;
+    else
+        tran_vld <= #`DEL tran_vld_next;
+
+always @ ( posedge clk or posedge rst )
+    if ( rst )
+        tran_cnt <= #`DEL 4'b0;
+    else if (~tran_vld_next)
+        tran_cnt <= #`DEL 4'b0;
+    else if (tx_en)
+        tran_cnt <= #`DEL tran_cnt + 1'b1;
+    
+always @ ( posedge clk or posedge rst )
+    if ( rst )
+        tx <= #`DEL 1'b1;
+    else 
+        case ( tran_cnt )
+        4'd0 : tx <= #`DEL 1'b1;
+        4'd1 : tx <= #`DEL 1'b0;
+        4'd2 : tx <= #`DEL tx_rdy_data[0];
+        4'd3 : tx <= #`DEL tx_rdy_data[1];   	
+        4'd4 : tx <= #`DEL tx_rdy_data[2];
+        4'd5 : tx <= #`DEL tx_rdy_data[3];
+        4'd6 : tx <= #`DEL tx_rdy_data[4];
+        4'd7 : tx <= #`DEL tx_rdy_data[5];   	
+        4'd8 : tx <= #`DEL tx_rdy_data[6];
+        4'd9 : tx <= #`DEL tx_rdy_data[7];
+    	4'd10: tx <= #`DEL 1'b1;
+    	default: tx <= #`DEL 1'b1;
+    	endcase
+    	
+
+/*
 always @ ( posedge clk or posedge rst )
 if ( rst )
     tran_vld <= #`DEL 1'b0;
 else if ( tx_vld )
     tran_vld <= #`DEL 1'b1;
-else if ( tran_vld & rx_en & ( tran_cnt== 4'd10 ) )
+else if ( tran_vld & tx_en & ( tran_cnt== 4'd10 ) )
     tran_vld <= #`DEL 1'b0;
 else;
 
@@ -124,7 +192,7 @@ always @ ( posedge clk or posedge rst )
 if ( rst )
     tran_cnt <= #`DEL 4'b0;
 else if ( tran_vld )
-    if( rx_en )
+    if( tx_en )
 	    tran_cnt <= #`DEL tran_cnt + 1'b1;
 	else;
 else
@@ -134,7 +202,7 @@ always @ ( posedge clk or posedge rst )
 if ( rst )
     tx <= #`DEL 1'b1;
 else if ( tran_vld )
-    if ( rx_en )
+    if ( tx_en )
     case ( tran_cnt )
     4'd0 : tx <= #`DEL 1'b0;
     4'd1 : tx <= #`DEL tx_rdy_data[0];
@@ -152,6 +220,8 @@ else if ( tran_vld )
 	else;
 else
     tx<= #`DEL 1'b1;
+*/
+
 
 assign txrdy = ~tran_vld;
 

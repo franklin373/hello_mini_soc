@@ -4,7 +4,8 @@ module hello_soc_top (
    RxD,
    
    TxD,
-   LED_out
+   LED_out,
+   KEY_in
    );
    
 input              clk_50m;
@@ -13,8 +14,8 @@ input              RxD;
 
 output             TxD;
 output     [1:0]        LED_out;
+input              KEY_in;
 
-wire               clk;
 wire               rst;
 wire  [31:0]       rom_data;
 wire  [31:0]       ram_addr;
@@ -32,11 +33,20 @@ wire               rx_vld;
 wire  [7:0]        rx_data;
 wire               txrdy;
 
+//wire               rx_n;
+//wire               tx_n;
+
 reg   [31:0]       ram_rdata;
 reg   [3:0]        mod_sel;
+reg   [3:0]        mod_sel_d;
 reg                tx_vld;
 reg   [7:0]        tx_data;
 
+wire               clk;
+/*
+reg                clk;
+wire                clk2;
+*/
   pll u_pll
    (// Clock in ports
     .inclk0            (clk_50m),      // IN
@@ -45,6 +55,13 @@ reg   [7:0]        tx_data;
 
 assign rst = ~rst_n;
 
+/*
+	always @ ( posedge clk2 or posedge rst )
+        if( rst ) 
+            clk <= 1'b0;
+        else 
+            clk <= ~clk;
+*/
 arm9_compatiable_code u_arm9(
           .clk                 (    clk                   ),
           .cpu_en              (    1'b1                  ),
@@ -77,7 +94,7 @@ rom  u_rom(
 	      .q_b               (    ram_rdata_rom                                )
 		  );		
 
-`ifdef NEVER_DEFINED		
+/*
 ram u_ram (
 
          .clka                  (    clk                                 ),
@@ -88,16 +105,16 @@ ram u_ram (
 	     
 	     .douta                 (    ram_rdata_ram                       )
 	);		  
-`else
+*/
 ram u_ram (
 	     .address                 (    ram_addr[10:2]                      ),
 	     .byteena                   (    ram_flag            ),
          .clock                  (    clk                                 ),
 	     .data                  (    ram_wdata                           ),
-	     .wren                   (    ram_wen & (ram_addr[31:28]==4'h4)   ),
+	     .wren                   (    ram_wen & mod_sel[0]   ),
 	     .q                 (    ram_rdata_ram                       )
 	);		  
-`endif
+
 /*
 rxtx 
 #( .baud ( 115200 ),
@@ -121,18 +138,20 @@ rxtx_bus u_uart(
    .rst(rst),
    .ce(mod_sel[2]),
    .we(ram_wen),
-   .addr(ram_addr[2:0]),
+   .addr(ram_addr[3:0]),
    .din(ram_wdata),
    .dout(uart_rdata),
 
-   .RxD(RxD),
-   .TxD(TxD),
+   .RxD(RxD/*rx_n*/),
+   .TxD(TxD/*tx_n*/),
    );
+//assign rx_n=~RxD;   
+//assign TxD=~tx_n;  
 
 gpio_bus u_gpio(
    .clk(clk),
    .rst(rst),
-   .ce(mod_sel[2]),
+   .ce(mod_sel[3]),
    .we(ram_wen),
    .addr(ram_addr[2:0]),
    .din(ram_wdata),
@@ -140,20 +159,32 @@ gpio_bus u_gpio(
 
    .gpio(LED_out[1]),
    );
-   
+/*   
 always @ (posedge clk or posedge rst )
 if ( rst )
     mod_sel <= 4'b1;
-else if (ram_cen /*& ~ram_wen*/)
+else if (ram_cen )
     mod_sel <= {(ram_addr[31:28]==4'hd), (ram_addr[31:28]==4'he),(ram_addr[31:28]==4'h0),(ram_addr[31:28]==4'h4) };
 else;
-	
+*/
+always @(*)
+if (ram_cen)
+    mod_sel = {(ram_addr[31:28]==4'hd), (ram_addr[31:28]==4'he),(ram_addr[31:28]==4'h0),(ram_addr[31:28]==4'h4) };
+else
+    mod_sel = 4'h0;
+
+always @(posedge clk or posedge rst)
+    if(rst)
+        mod_sel_d<=4'b1;
+    else
+        mod_sel_d<=mod_sel;
+
 always @ ( * )
-if (mod_sel[3])
+if (mod_sel_d[3])
     ram_rdata = gpio_rdata;
-else if (mod_sel[2])
+else if (mod_sel_d[2])
     ram_rdata = uart_rdata;
-else if (mod_sel[1])
+else if (mod_sel_d[1])
     ram_rdata = ram_rdata_rom;
 else //if (mod_sel[0])
     ram_rdata = ram_rdata_ram;
