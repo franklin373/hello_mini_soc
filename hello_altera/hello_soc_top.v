@@ -5,7 +5,15 @@ module hello_soc_top (
    
    TxD,
    LED_out,
-   KEY_in
+   KEY_in,
+
+    /*external SRAM*/
+    address_ram,
+    byteena_ram,
+    io_ram,
+    wren_ram,
+    ce_ram,
+    oe_ram
    );
    
 input              clk_50m;
@@ -15,6 +23,14 @@ input              RxD;
 output             TxD;
 output     [1:0]        LED_out;
 input              KEY_in;
+
+	output [8:0] address_ram;
+	output [1:0] byteena_ram;
+	inout [15:0] io_ram;
+	output wren_ram;
+	output ce_ram;
+	output oe_ram;
+
 
 wire               rst;
 wire  [31:0]       rom_data;
@@ -43,10 +59,18 @@ reg                tx_vld;
 reg   [7:0]        tx_data;
 
 wire               clk;
+wire               wait_cpu;
 /*
 reg                clk;
 wire                clk2;
 */
+
+wire[15:0] io_ram;
+wire[15:0] data_ram;
+wire data_oe_tri;
+
+
+
   pll u_pll
    (// Clock in ports
     .inclk0            (clk_50m),      // IN
@@ -64,7 +88,7 @@ assign rst = ~rst_n;
 */
 arm9_compatiable_code u_arm9(
           .clk                 (    clk                   ),
-          .cpu_en              (    1'b1                  ),
+          .cpu_en              (    ~wait_cpu/*1'b1*/                  ),
           .cpu_restart         (    1'b0                  ),
           .fiq                 (    1'b0                  ),
           .irq                 (    1'b0                  ),
@@ -106,6 +130,8 @@ ram u_ram (
 	     .douta                 (    ram_rdata_ram                       )
 	);		  
 */
+/*ram altera internal ram*/
+/*
 ram u_ram (
 	     .address                 (    ram_addr[10:2]                      ),
 	     .byteena                   (    ram_flag            ),
@@ -113,8 +139,55 @@ ram u_ram (
 	     .data                  (    ram_wdata                           ),
 	     .wren                   (    ram_wen & mod_sel[0]   ),
 	     .q                 (    ram_rdata_ram                       )
-	);		  
+	);	
+*/	
 
+assign io_ram=( data_oe_tri? data_ram : {32{1'bZ}} );
+
+sram_extern_32 u_ram(
+        .clock(clk),
+        .rst(rst),
+
+        .address_bus(ram_addr[10:2]),
+        .byteena_bus(ram_flag),
+        .data_bus(ram_wdata),
+        .wren_bus(ram_wen),
+        .ce_bus(mod_sel[0]),
+        .q_bus(ram_rdata_ram),
+        .wait_bus(wait_cpu),
+
+        .address_ram(address_ram),
+        .byteena_ram(byteena_ram),
+        .data_ram(data_ram),
+        .data_oe_tri(data_oe_tri),
+        .wren_ram(wren_ram),
+        .ce_ram(ce_ram),
+        .oe_ram(oe_ram),
+        .q_ram(io_ram)
+    );
+/*	
+module sram_extern_32 (
+	clock,
+	rst,
+
+	address_bus,
+	byteena_bus,
+	data_bus,
+	wren_bus,
+	ce_bus,
+	q_bus,
+	wait_bus,
+
+    address_ram,
+    byteena_ram,
+    data_ram,
+    data_oe_tri,
+    wren_ram,
+    ce_ram,
+    oe_ram,
+    q_ram,
+	);
+*/	
 /*
 rxtx 
 #( .baud ( 115200 ),
@@ -143,7 +216,7 @@ rxtx_bus u_uart(
    .dout(uart_rdata),
 
    .RxD(RxD/*rx_n*/),
-   .TxD(TxD/*tx_n*/),
+   .TxD(TxD/*tx_n*/)
    );
 //assign rx_n=~RxD;   
 //assign TxD=~tx_n;  
@@ -157,7 +230,7 @@ gpio_bus u_gpio(
    .din(ram_wdata),
    .dout(gpio_rdata),
 
-   .gpio(LED_out[1]),
+   .gpio(LED_out[1])
    );
 /*   
 always @ (posedge clk or posedge rst )

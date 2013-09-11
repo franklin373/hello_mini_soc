@@ -1,3 +1,5 @@
+`include "includes.v"
+
 `define DEL 3
 module rxtx
 #(parameter baud = 9600,

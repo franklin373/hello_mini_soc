@@ -42,8 +42,8 @@ set_global_assignment -name TOP_LEVEL_ENTITY hello_soc_top
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 9.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "13:45:31  MARCH 05, 2013"
 set_global_assignment -name LAST_QUARTUS_VERSION 11.1
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (Verilog)"
-set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_TIME_SCALE "1 ns" -section_id eda_simulation
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
 set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
@@ -63,20 +63,10 @@ set_location_assignment PIN_A8 -to RxD
 set_location_assignment PIN_G5 -to TxD
 set_location_assignment PIN_R9 -to clk_50m
 set_location_assignment PIN_M1 -to rst_n
-set_global_assignment -name VERILOG_FILE gpio_bus.v
-set_global_assignment -name VERILOG_FILE rxtx_bus.v
-set_global_assignment -name VERILOG_FILE led0_module.v
-set_global_assignment -name VERILOG_FILE arm9_compatiable_code.v
-set_global_assignment -name VERILOG_FILE hello_soc_top.v
-set_global_assignment -name VERILOG_FILE rxtx.v
-set_global_assignment -name QIP_FILE ram.qip
-set_global_assignment -name QIP_FILE rom.qip
-set_global_assignment -name QIP_FILE pll.qip
 set_location_assignment PIN_J2 -to LED_out[1]
 set_location_assignment PIN_J1 -to LED_out[0]
 set_global_assignment -name ENABLE_SIGNALTAP ON
 set_global_assignment -name USE_SIGNALTAP_FILE stp_a.stp
-set_global_assignment -name SIGNALTAP_FILE stp_a.stp
 set_location_assignment PIN_R8 -to KEY_in
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
@@ -468,4 +458,23 @@ set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_IN_ENABLE
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=basic,1,basic,1,basic,1," -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_LEVEL_PIPELINE=1" -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ENABLE_ADVANCED_TRIGGER=0" -section_id auto_signaltap_0
+set_global_assignment -name VERILOG_FILE sram_extern_32.v
+set_global_assignment -name VERILOG_FILE sram_conv_32_16.v
+set_global_assignment -name VERILOG_FILE sram_extern_16.v
+set_global_assignment -name VERILOG_FILE gpio_bus.v
+set_global_assignment -name VERILOG_FILE rxtx_bus.v
+set_global_assignment -name VERILOG_FILE led0_module.v
+set_global_assignment -name VERILOG_FILE arm9_compatiable_code.v
+set_global_assignment -name VERILOG_FILE hello_soc_top.v
+set_global_assignment -name VERILOG_FILE rxtx.v
+set_global_assignment -name QIP_FILE ram.qip
+set_global_assignment -name QIP_FILE rom.qip
+set_global_assignment -name QIP_FILE pll.qip
+set_global_assignment -name SIGNALTAP_FILE stp_a.stp
+set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH hello_soc_top_vlg_tst -section_id eda_simulation
+set_global_assignment -name EDA_TEST_BENCH_NAME hello_soc_top_vlg_tst -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME i1 -section_id hello_soc_top_vlg_tst
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME hello_soc_top_vlg_tst -section_id hello_soc_top_vlg_tst
+set_global_assignment -name EDA_TEST_BENCH_FILE simulation/modelsim/hello_soc_top.vt -section_id hello_soc_top_vlg_tst
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

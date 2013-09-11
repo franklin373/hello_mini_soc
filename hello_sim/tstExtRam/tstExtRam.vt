@@ -1,0 +1,287 @@
+/*
+module sram_extern_32 (
+	clock,
+	rst,
+
+	address_bus,
+	byteena_bus,
+	data_bus,
+	wren_bus,
+	ce_bus,
+	q_bus,
+	wait_bus,
+
+    address_ram,
+    byteena_ram,
+    data_ram,
+    data_oe_tri,
+    wren_ram,
+    ce_ram,
+    oe_ram,
+    q_ram,
+	);
+
+	input	  clock;
+	input     rst;
+	
+	input	[8:0]  address_bus;
+	input	[3:0]  byteena_bus;
+	input	[31:0]  data_bus;
+	input	  wren_bus;
+	input ce_bus;
+	output	[31:0]  q_bus;
+	output wait_bus;
+
+	output [8:0] address_ram;
+	output [1:0] byteena_ram;
+	output [15:0] data_ram;
+	output data_oe_tri;
+	output wren_ram;
+	output ce_ram;
+	output oe_ram;
+	input [15:0] q_ram;
+*/
+
+`timescale 1 ns/ 100 ps
+module tstExtRam();
+// constants                                           
+// general purpose registers
+//reg eachvec;
+// test vector input registers
+//reg KEY_in;
+//reg RxD;
+reg clk_50m;
+reg rst_n;
+	reg	[8:0]  address_bus;
+	reg	[3:0]  byteena_bus;
+	reg	[31:0]  data_bus;
+	reg	  wren_bus;
+	reg ce_bus;
+	wire	[31:0]  q_bus;
+	wire wait_bus;
+
+	wire [8:0] address_ram;
+	wire [1:0] byteena_ram;
+	wire [15:0] data_ram;
+	wire data_oe_tri;
+	wire wren_ram;
+	wire ce_ram;
+	wire oe_ram;
+// wires                                               
+//wire [1:0]  LED_out;
+//wire TxD;
+
+// assign statements (if any)   
+    reg [15:0] async_ram_q;
+sram_sync32_async16 i1 (
+    .iClock(clk_50m),
+    .iRst(!rst_n),
+
+    .iSync32_address(address_bus),
+    .iSync32_byteena(byteena_bus),
+    .iSync32_data(data_bus),
+    .iSync32_wren(wren_bus),
+    .iSync32_ce(ce_bus),
+    .oSync32_q(q_bus),
+    .oSync32_wait(wait_bus),
+
+    .oAsync16_address(address_ram),
+    .oAsync16_byteena_n(byteena_ram),
+    .oAsync16_data(data_ram),
+    .oAsync16_data_oe_tri(data_oe_tri),
+    .oAsync16_wren_n(wren_ram),
+    .oAsync16_ce_n(ce_ram),
+    .oAsync16_oe_n(oe_ram),
+    .iAsync16_q(async_ram_q)
+);
+/***********drive for async ram*************************/
+    always @ * begin
+        if(wren_ram==1'b1&&ce_ram==1'b0&&oe_ram==1'b0)begin
+            async_ram_q=16'h0102;
+        end else begin
+            async_ram_q={16{1'bz}};
+        end
+    end
+/*******************************************************/
+/*
+hello_soc_top i1 (
+// port map - connection between master ports and signals/registers   
+	.KEY_in(KEY_in),
+	.LED_out(LED_out),
+	.RxD(RxD),
+	.TxD(TxD),
+	.clk_50m(clk_50m),
+	.rst_n(rst_n)
+);
+*/
+    reg wait_bus_posedge;
+
+task single_word_write_low;
+begin:Loop
+    integer i;
+    
+	for(i=0;i==0||wait_bus_posedge;i=i+1) begin
+        address_bus=9'b100;
+        byteena_bus=4'b1;
+        data_bus=32'b1;
+        wren_bus=1'b1;
+        ce_bus=1'b1;
+        #10
+        wait_bus_posedge=wait_bus;
+        #10;
+    end
+end
+endtask
+
+
+task single_word_write_high;
+begin:Loop
+    integer i;
+    
+	for(i=0;i==0||wait_bus_posedge;i=i+1) begin
+        address_bus=9'b100;
+        byteena_bus=4'b1100;
+        data_bus=32'b1;
+        wren_bus=1'b1;
+        ce_bus=1'b1;
+        #10
+        wait_bus_posedge=wait_bus;
+        #10;
+    end
+end
+endtask
+
+task double_word_write;
+begin:Loop
+    integer i;
+    
+	for(i=0;i==0||wait_bus_posedge;i=i+1) begin
+        address_bus=9'b100;
+        byteena_bus=4'b1111;
+        data_bus=32'h10203040;
+        wren_bus=1'b1;
+        ce_bus=1'b1;
+        #10
+        wait_bus_posedge=wait_bus;
+        #10;
+    end
+end
+endtask
+
+task single_word_read_low;
+begin:Loop
+    integer i;
+    
+	for(i=0;i==0||wait_bus_posedge;i=i+1) begin
+        address_bus=9'b100;
+        byteena_bus=4'b1;
+        data_bus={32{1'bz}};
+        wren_bus=1'b0;
+        ce_bus=1'b1;
+        #10
+        wait_bus_posedge=wait_bus;
+        #10;
+    end
+end
+endtask
+
+
+task single_word_read_high;
+begin:Loop
+    integer i;
+    
+	for(i=0;i==0||wait_bus_posedge;i=i+1) begin
+        address_bus=9'b100;
+        byteena_bus=4'b1100;
+        data_bus={32{1'bz}};
+        wren_bus=1'b0;
+        ce_bus=1'b1;
+        #10
+        wait_bus_posedge=wait_bus;
+        #10;
+    end
+end
+endtask
+
+task double_word_read;
+begin:Loop
+    integer i;
+    
+	for(i=0;i==0||wait_bus_posedge;i=i+1) begin
+        address_bus=9'b100;
+        byteena_bus=4'b1111;
+        data_bus={32{1'bz}};
+        wren_bus=1'b0;
+        ce_bus=1'b1;
+        #10
+        wait_bus_posedge=wait_bus;
+        #10;
+    end
+end
+endtask
+
+
+initial                                                
+begin:multi          
+//    integer i;
+// code that executes only once                        
+// insert code here --> begin                          
+                                                       
+// --> end                                             
+$display("Running testbench");  
+	clk_50m=1;
+	rst_n=1;
+
+    address_bus=9'b0;
+    byteena_bus=4'b0;
+    data_bus=32'b0;
+    wren_bus=1'b0;
+    ce_bus=1'b0;
+	
+	#10 rst_n=0;
+	#40 rst_n=1;
+	#100 
+/*	
+	for(i=0;i==0||wait_bus_posedge;i=i+1) begin
+        address_bus=9'b10;
+        byteena_bus=4'b1;
+        data_bus=32'b1;
+        wren_bus=1'b1;
+        ce_bus=1'b1;
+        #10
+        wait_bus_posedge=wait_bus;
+        #10;
+    end
+*/
+//    single_word_write_low();
+//    single_word_write_high();
+//    double_word_write();
+//    single_word_read_low();
+//    single_word_read_high();
+    double_word_read();
+    address_bus=9'b0;
+    byteena_bus=4'b0;
+    data_bus=32'b0;
+    wren_bus=1'b0;
+    ce_bus=1'b0;
+    
+	
+	#1000 $finish;
+end   
+
+always #10
+	clk_50m=~clk_50m;
+/*	
+always                                                 
+// optional sensitivity list                           
+// @(event1 or event2 or .... eventn)                  
+begin                                                  
+// code executes for every event on sensitivity list   
+// insert code here --> begin                          
+                                                       
+@eachvec;                                              
+// --> end                                             
+end   
+*/
+endmodule
+

@@ -39,7 +39,7 @@ initial begin
   $fdisplay(fd,"");
   $fdisplay(fd,"END;");
   $fdisplay(fd,"");
-  $fdisplay(fd,"/* End of file */");
+  $fdisplay(fd,"%% End of file %%");
 end
 
 wire        rom_en;
