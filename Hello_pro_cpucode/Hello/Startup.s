@@ -314,6 +314,16 @@ Reset_Handler
 
 ; Enter the C code
 
+; just for debug
+;				IMPORT ram_test1
+;				LDR		R0, =ram_test1
+;				IMPORT ram_test2_assembly
+;				BL		ram_test2_assembly
+; just for debug
+
+
+
+
                 IMPORT  __main
                 LDR     R0, =__main
                 BX      R0

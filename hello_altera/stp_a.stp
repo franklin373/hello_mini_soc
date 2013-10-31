@@ -1,10 +1,22 @@
 <session jtag_chain="USB-Blaster [USB-1]" jtag_device="@1: EP3C16/EP4CE15 (0x020F20DD)" sof_file="hello_soc_top.sof">
   <display_tree gui_logging_enabled="0">
-    <display_branch instance="auto_signaltap_0" log="USE_GLOBAL_TEMP" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
+    <display_branch instance="auto_signaltap_0" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
   </display_tree>
   <instance entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
     <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
-    <signal_set global_temp="1" is_expanded="true" name="signal_set: 2013/06/15 20:38:09  #0">
+    <position_info>
+      <single attribute="active tab" value="1"/>
+      <single attribute="data horizontal scroll position" value="12"/>
+      <single attribute="data vertical scroll position" value="14"/>
+      <single attribute="setup horizontal scroll position" value="0"/>
+      <single attribute="setup vertical scroll position" value="0"/>
+      <single attribute="zoom level denominator" value="1"/>
+      <single attribute="zoom level numerator" value="8"/>
+      <single attribute="zoom offset denominator" value="1"/>
+      <single attribute="zoom offset numerator" value="16368"/>
+      <multi attribute="timebars" size="1" value="33"/>
+    </position_info>
+    <signal_set global_temp="1" name="signal_set: 2013/10/29 14:05:22  #0">
       <clock name="pll:u_pll|c0" polarity="posedge" tap_mode="classic"/>
       <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="128" trigger_in_enable="no" trigger_in_node="KEY_in" trigger_in_tap_mode="classic" trigger_out_enable="no"/>
       <top_entity/>
@@ -46,6 +58,10 @@
           <wire name="arm9_compatiable_code:u_arm9|ram_addr[8]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_addr[9]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_cen" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[3]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_rdata[0]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_rdata[10]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_rdata[11]" tap_mode="classic" type="combinatorial"/>
@@ -144,12 +160,29 @@
           <wire name="arm9_compatiable_code:u_arm9|rom_addr[8]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|rom_addr[9]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|rom_en" tap_mode="classic" type="combinatorial"/>
-          <wire name="clk" tap_mode="classic" type="register"/>
           <wire name="gpio_bus:u_gpio|gpio" tap_mode="classic" type="combinatorial"/>
+          <wire name="io_ram[0]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[10]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[11]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[12]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[13]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[14]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[15]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[1]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[2]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[3]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[4]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[5]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[6]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[7]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[8]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[9]" tap_mode="classic" type="bidir pin"/>
           <wire name="mod_sel[0]" tap_mode="classic" type="register"/>
           <wire name="mod_sel[1]" tap_mode="classic" type="register"/>
           <wire name="mod_sel[2]" tap_mode="classic" type="register"/>
           <wire name="mod_sel[3]" tap_mode="classic" type="register"/>
+          <wire name="pll:u_pll|c1" tap_mode="classic" type="combinatorial"/>
+          <wire name="rst_n" tap_mode="classic" type="input pin"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|rx_cnt[0]" tap_mode="classic" type="register"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|rx_cnt[10]" tap_mode="classic" type="register"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|rx_cnt[11]" tap_mode="classic" type="register"/>
@@ -192,6 +225,81 @@
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|tx_rdy_data[7]" tap_mode="classic" type="register"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|txrdy" tap_mode="classic" type="combinatorial"/>
           <wire name="rxtx_bus:u_uart|tx_vld" tap_mode="classic" type="register"/>
+          <wire name="sram_adaptor_en:u_ram_adaptor_en|oAdaptor_en" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_ce" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_wren" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_byteena_n[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_byteena_n[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_ce_n" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data_oe_tri" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_oe_n" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_wren_n" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|ocSync32_wait" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|state[0]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[1]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[2]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[3]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[4]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[5]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[6]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[7]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[8]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[9]" tap_mode="classic" type="register"/>
         </trigger_input_vec>
         <data_input_vec>
           <wire name="KEY_in" tap_mode="classic" type="input pin"/>
@@ -230,6 +338,10 @@
           <wire name="arm9_compatiable_code:u_arm9|ram_addr[8]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_addr[9]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_cen" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[3]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_rdata[0]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_rdata[10]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_rdata[11]" tap_mode="classic" type="combinatorial"/>
@@ -328,12 +440,29 @@
           <wire name="arm9_compatiable_code:u_arm9|rom_addr[8]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|rom_addr[9]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|rom_en" tap_mode="classic" type="combinatorial"/>
-          <wire name="clk" tap_mode="classic" type="register"/>
           <wire name="gpio_bus:u_gpio|gpio" tap_mode="classic" type="combinatorial"/>
+          <wire name="io_ram[0]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[10]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[11]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[12]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[13]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[14]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[15]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[1]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[2]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[3]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[4]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[5]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[6]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[7]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[8]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[9]" tap_mode="classic" type="bidir pin"/>
           <wire name="mod_sel[0]" tap_mode="classic" type="register"/>
           <wire name="mod_sel[1]" tap_mode="classic" type="register"/>
           <wire name="mod_sel[2]" tap_mode="classic" type="register"/>
           <wire name="mod_sel[3]" tap_mode="classic" type="register"/>
+          <wire name="pll:u_pll|c1" tap_mode="classic" type="combinatorial"/>
+          <wire name="rst_n" tap_mode="classic" type="input pin"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|rx_cnt[0]" tap_mode="classic" type="register"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|rx_cnt[10]" tap_mode="classic" type="register"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|rx_cnt[11]" tap_mode="classic" type="register"/>
@@ -376,6 +505,81 @@
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|tx_rdy_data[7]" tap_mode="classic" type="register"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|txrdy" tap_mode="classic" type="combinatorial"/>
           <wire name="rxtx_bus:u_uart|tx_vld" tap_mode="classic" type="register"/>
+          <wire name="sram_adaptor_en:u_ram_adaptor_en|oAdaptor_en" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_ce" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_wren" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_byteena_n[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_byteena_n[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_ce_n" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data_oe_tri" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_oe_n" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_wren_n" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|ocSync32_wait" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|state[0]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[1]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[2]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[3]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[4]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[5]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[6]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[7]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[8]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[9]" tap_mode="classic" type="register"/>
         </data_input_vec>
         <storage_qualifier_input_vec>
           <wire name="KEY_in" tap_mode="classic" type="input pin"/>
@@ -414,6 +618,10 @@
           <wire name="arm9_compatiable_code:u_arm9|ram_addr[8]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_addr[9]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_cen" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="arm9_compatiable_code:u_arm9|ram_flag[3]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_rdata[0]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_rdata[10]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|ram_rdata[11]" tap_mode="classic" type="combinatorial"/>
@@ -512,12 +720,29 @@
           <wire name="arm9_compatiable_code:u_arm9|rom_addr[8]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|rom_addr[9]" tap_mode="classic" type="combinatorial"/>
           <wire name="arm9_compatiable_code:u_arm9|rom_en" tap_mode="classic" type="combinatorial"/>
-          <wire name="clk" tap_mode="classic" type="register"/>
           <wire name="gpio_bus:u_gpio|gpio" tap_mode="classic" type="combinatorial"/>
+          <wire name="io_ram[0]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[10]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[11]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[12]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[13]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[14]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[15]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[1]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[2]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[3]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[4]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[5]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[6]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[7]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[8]" tap_mode="classic" type="bidir pin"/>
+          <wire name="io_ram[9]" tap_mode="classic" type="bidir pin"/>
           <wire name="mod_sel[0]" tap_mode="classic" type="register"/>
           <wire name="mod_sel[1]" tap_mode="classic" type="register"/>
           <wire name="mod_sel[2]" tap_mode="classic" type="register"/>
           <wire name="mod_sel[3]" tap_mode="classic" type="register"/>
+          <wire name="pll:u_pll|c1" tap_mode="classic" type="combinatorial"/>
+          <wire name="rst_n" tap_mode="classic" type="input pin"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|rx_cnt[0]" tap_mode="classic" type="register"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|rx_cnt[10]" tap_mode="classic" type="register"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|rx_cnt[11]" tap_mode="classic" type="register"/>
@@ -560,12 +785,88 @@
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|tx_rdy_data[7]" tap_mode="classic" type="register"/>
           <wire name="rxtx_bus:u_uart|rxtx:u_uart|txrdy" tap_mode="classic" type="combinatorial"/>
           <wire name="rxtx_bus:u_uart|tx_vld" tap_mode="classic" type="register"/>
+          <wire name="sram_adaptor_en:u_ram_adaptor_en|oAdaptor_en" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iAsync16_q[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_byteena[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_ce" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|iSync32_wren" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_address[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_byteena_n[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_byteena_n[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_ce_n" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_data_oe_tri" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_oe_n" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|oAsync16_wren_n" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|ocSync32_wait" tap_mode="classic" type="combinatorial"/>
+          <wire name="sram_sync32_async16:u_ram|state[0]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[1]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[2]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[3]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[4]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[5]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[6]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[7]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[8]" tap_mode="classic" type="register"/>
+          <wire name="sram_sync32_async16:u_ram|state[9]" tap_mode="classic" type="register"/>
         </storage_qualifier_input_vec>
       </signal_vec>
       <presentation>
         <data_view>
+          <net is_signal_inverted="no" name="pll:u_pll|c1"/>
+          <net is_signal_inverted="no" name="rst_n"/>
           <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|cpu_en"/>
-          <net is_signal_inverted="no" name="clk"/>
           <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|rom_en"/>
           <bus is_signal_inverted="no" link="all" name="arm9_compatiable_code:u_arm9|rom_addr" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
             <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|rom_addr[31]"/>
@@ -627,6 +928,47 @@
             <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_rdy_data[1]"/>
             <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_rdy_data[0]"/>
           </bus>
+          <net is_signal_inverted="no" name="KEY_in"/>
+          <bus is_signal_inverted="no" link="all" name="mod_sel" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="mod_sel[3]"/>
+            <net is_signal_inverted="no" name="mod_sel[2]"/>
+            <net is_signal_inverted="no" name="mod_sel[1]"/>
+            <net is_signal_inverted="no" name="mod_sel[0]"/>
+          </bus>
+          <net is_signal_inverted="no" name="gpio_bus:u_gpio|gpio"/>
+          <net is_signal_inverted="no" name="TxD"/>
+          <bus is_signal_inverted="no" link="all" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[13]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[12]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[11]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[10]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[9]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[8]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[7]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[6]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[5]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[4]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[3]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[2]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[1]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="rxtx_bus:u_uart|rxtx:u_uart|tran_cnt" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tran_cnt[3]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tran_cnt[2]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tran_cnt[1]"/>
+            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tran_cnt[0]"/>
+          </bus>
+          <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|txrdy"/>
+          <net is_signal_inverted="no" name="rxtx_bus:u_uart|tx_vld"/>
+          <bus is_signal_inverted="no" link="all" name="arm9_compatiable_code:u_arm9|ram_flag" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_flag[3]"/>
+            <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_flag[2]"/>
+            <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_flag[1]"/>
+            <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_flag[0]"/>
+          </bus>
+          <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_cen"/>
+          <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_wen"/>
           <bus is_signal_inverted="no" link="all" name="arm9_compatiable_code:u_arm9|ram_addr" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
             <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_addr[31]"/>
             <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_addr[30]"/>
@@ -661,9 +1003,6 @@
             <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_addr[1]"/>
             <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_addr[0]"/>
           </bus>
-          <net is_signal_inverted="no" name="KEY_in"/>
-          <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_cen"/>
-          <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_wen"/>
           <bus is_signal_inverted="no" link="all" name="arm9_compatiable_code:u_arm9|ram_rdata" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
             <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_rdata[31]"/>
             <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_rdata[30]"/>
@@ -732,42 +1071,116 @@
             <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_wdata[1]"/>
             <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_wdata[0]"/>
           </bus>
-          <bus is_signal_inverted="no" link="all" name="mod_sel" order="msb_to_lsb" radix="hex" state="collapse" type="register">
-            <net is_signal_inverted="no" name="mod_sel[3]"/>
-            <net is_signal_inverted="no" name="mod_sel[2]"/>
-            <net is_signal_inverted="no" name="mod_sel[1]"/>
-            <net is_signal_inverted="no" name="mod_sel[0]"/>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|iSync32_byteena" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_byteena[3]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_byteena[2]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_byteena[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_byteena[0]"/>
           </bus>
-          <net is_signal_inverted="no" name="gpio_bus:u_gpio|gpio"/>
-          <net is_signal_inverted="no" name="TxD"/>
-          <bus is_signal_inverted="no" link="all" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt" order="msb_to_lsb" radix="hex" state="collapse" type="register">
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[13]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[12]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[11]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[10]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[9]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[8]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[7]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[6]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[5]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[4]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[3]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[2]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[1]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[0]"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_wren"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_ce"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|ocSync32_wait"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_oe_n"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_ce_n"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_wren_n"/>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|oAsync16_address" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[18]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[17]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[16]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[15]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[14]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[13]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[12]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[11]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[10]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[9]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[8]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[7]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[6]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[5]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[4]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[3]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[2]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[0]"/>
           </bus>
-          <bus is_signal_inverted="no" link="all" name="rxtx_bus:u_uart|rxtx:u_uart|tran_cnt" order="msb_to_lsb" radix="hex" state="collapse" type="register">
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tran_cnt[3]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tran_cnt[2]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tran_cnt[1]"/>
-            <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tran_cnt[0]"/>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|oAsync16_data" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[15]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[14]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[13]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[12]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[11]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[10]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[9]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[8]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[7]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[6]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[5]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[4]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[3]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[2]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[0]"/>
           </bus>
-          <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|txrdy"/>
-          <net is_signal_inverted="no" name="rxtx_bus:u_uart|tx_vld"/>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|iAsync16_q" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[15]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[14]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[13]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[12]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[11]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[10]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[9]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[8]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[7]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[6]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[5]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[4]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[3]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[2]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|oAsync16_byteena_n" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_byteena_n[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_byteena_n[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="io_ram" order="msb_to_lsb" radix="hex" state="collapse" type="bidir pin">
+            <net is_signal_inverted="no" name="io_ram[15]"/>
+            <net is_signal_inverted="no" name="io_ram[14]"/>
+            <net is_signal_inverted="no" name="io_ram[13]"/>
+            <net is_signal_inverted="no" name="io_ram[12]"/>
+            <net is_signal_inverted="no" name="io_ram[11]"/>
+            <net is_signal_inverted="no" name="io_ram[10]"/>
+            <net is_signal_inverted="no" name="io_ram[9]"/>
+            <net is_signal_inverted="no" name="io_ram[8]"/>
+            <net is_signal_inverted="no" name="io_ram[7]"/>
+            <net is_signal_inverted="no" name="io_ram[6]"/>
+            <net is_signal_inverted="no" name="io_ram[5]"/>
+            <net is_signal_inverted="no" name="io_ram[4]"/>
+            <net is_signal_inverted="no" name="io_ram[3]"/>
+            <net is_signal_inverted="no" name="io_ram[2]"/>
+            <net is_signal_inverted="no" name="io_ram[1]"/>
+            <net is_signal_inverted="no" name="io_ram[0]"/>
+          </bus>
+          <net is_signal_inverted="no" name="sram_adaptor_en:u_ram_adaptor_en|oAdaptor_en"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data_oe_tri"/>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|state" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[9]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[8]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[7]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[6]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[5]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[4]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[3]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[2]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[0]"/>
+          </bus>
         </data_view>
         <setup_view>
+          <net is_signal_inverted="no" name="pll:u_pll|c1"/>
+          <net is_signal_inverted="no" name="rst_n"/>
           <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|cpu_en"/>
-          <net is_signal_inverted="no" name="clk"/>
           <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|rom_en"/>
           <bus is_signal_inverted="no" link="all" name="arm9_compatiable_code:u_arm9|rom_addr" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
             <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|rom_addr[31]"/>
@@ -965,28 +1378,142 @@
             <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[2]"/>
             <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[1]"/>
             <net is_signal_inverted="no" name="rxtx_bus:u_uart|rxtx:u_uart|tx_cnt[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="arm9_compatiable_code:u_arm9|ram_flag" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_flag[3]"/>
+            <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_flag[2]"/>
+            <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_flag[1]"/>
+            <net is_signal_inverted="no" name="arm9_compatiable_code:u_arm9|ram_flag[0]"/>
+          </bus>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_ce_n"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_oe_n"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_wren_n"/>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|oAsync16_address" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[18]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[17]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[16]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[15]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[14]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[13]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[12]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[11]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[10]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[9]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[8]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[7]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[6]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[5]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[4]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[3]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[2]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_address[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|oAsync16_data" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[15]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[14]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[13]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[12]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[11]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[10]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[9]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[8]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[7]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[6]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[5]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[4]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[3]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[2]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|iAsync16_q" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[15]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[14]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[13]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[12]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[11]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[10]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[9]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[8]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[7]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[6]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[5]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[4]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[3]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[2]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iAsync16_q[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|oAsync16_byteena_n" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_byteena_n[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_byteena_n[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="io_ram" order="msb_to_lsb" radix="hex" state="collapse" type="bidir pin">
+            <net is_signal_inverted="no" name="io_ram[15]"/>
+            <net is_signal_inverted="no" name="io_ram[14]"/>
+            <net is_signal_inverted="no" name="io_ram[13]"/>
+            <net is_signal_inverted="no" name="io_ram[12]"/>
+            <net is_signal_inverted="no" name="io_ram[11]"/>
+            <net is_signal_inverted="no" name="io_ram[10]"/>
+            <net is_signal_inverted="no" name="io_ram[9]"/>
+            <net is_signal_inverted="no" name="io_ram[8]"/>
+            <net is_signal_inverted="no" name="io_ram[7]"/>
+            <net is_signal_inverted="no" name="io_ram[6]"/>
+            <net is_signal_inverted="no" name="io_ram[5]"/>
+            <net is_signal_inverted="no" name="io_ram[4]"/>
+            <net is_signal_inverted="no" name="io_ram[3]"/>
+            <net is_signal_inverted="no" name="io_ram[2]"/>
+            <net is_signal_inverted="no" name="io_ram[1]"/>
+            <net is_signal_inverted="no" name="io_ram[0]"/>
+          </bus>
+          <net is_signal_inverted="no" name="sram_adaptor_en:u_ram_adaptor_en|oAdaptor_en"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|ocSync32_wait"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|oAsync16_data_oe_tri"/>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|iSync32_byteena" order="msb_to_lsb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_byteena[3]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_byteena[2]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_byteena[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_byteena[0]"/>
+          </bus>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_ce"/>
+          <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|iSync32_wren"/>
+          <bus is_signal_inverted="no" link="all" name="sram_sync32_async16:u_ram|state" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[9]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[8]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[7]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[6]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[5]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[4]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[3]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[2]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[1]"/>
+            <net is_signal_inverted="no" name="sram_sync32_async16:u_ram|state[0]"/>
           </bus>
         </setup_view>
       </presentation>
-      <trigger CRC="8A6E5B55" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2013/06/23 22:07:30  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="low" trigger_out="active high" trigger_type="circular">
+      <trigger attribute_mem_mode="false" gap_record="true" global_temp="1" name="trigger: 2013/10/31 16:28:11  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="low" trigger_out="active high" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no" trigger_in="dont_care" trigger_out="active high"/>
         <events use_custom_flow_control="no">
-          <level enabled="no" name="condition1" type="basic">'arm9_compatiable_code:u_arm9|ram_addr[0]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[10]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[11]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[12]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[13]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[14]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[15]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[16]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[17]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[18]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[19]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[1]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[20]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[21]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[22]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[23]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[24]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[25]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[26]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[27]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[28]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[29]' == high &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[2]' == high &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[30]' == high &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[31]' == high &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[3]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[4]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[5]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[6]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[7]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[8]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[9]' == low
+          <level enabled="yes" name="condition1" type="basic">'rst_n' == rising edge
             <power_up enabled="yes">
-            </power_up><op_node/>
+            </power_up>
+            <op_node/>
           </level>
-          <level enabled="yes" name="condition2" type="basic">'TxD' == falling edge
+          <level enabled="yes" name="condition2" type="basic">'arm9_compatiable_code:u_arm9|rom_addr[0]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[10]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[11]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[12]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[13]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[14]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[15]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[16]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[17]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[18]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[19]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[1]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[20]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[21]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[22]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[23]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[24]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[25]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[26]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[27]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[28]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[29]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[2]' == high &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[30]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[31]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[3]' == high &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[4]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[5]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[6]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[7]' == high &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[8]' == high &amp;&amp; 'arm9_compatiable_code:u_arm9|rom_addr[9]' == low
             <power_up enabled="yes">
-            </power_up><op_node/>
+            </power_up>
+            <op_node/>
           </level>
-          <level enabled="no" name="condition3" type="basic">'arm9_compatiable_code:u_arm9|ram_addr[0]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[10]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[11]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[12]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[13]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[14]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[15]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[16]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[17]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[18]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[19]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[1]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[20]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[21]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[22]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[23]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[24]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[25]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[26]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[27]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[28]' == high &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[29]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[2]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[30]' == high &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[31]' == high &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[3]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[4]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[5]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[6]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[7]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[8]' == low &amp;&amp; 'arm9_compatiable_code:u_arm9|ram_addr[9]' == low
+          <level enabled="no" name="condition3" type="basic">'gpio_bus:u_gpio|gpio' == rising edge
             <power_up enabled="yes">
-            </power_up><op_node/>
+            </power_up>
+            <op_node/>
           </level>
         </events>
         <storage_qualifier_events>
-          <transitional>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-            <pwr_up_transitional>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</pwr_up_transitional>
+          <transitional>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            <pwr_up_transitional>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</pwr_up_transitional>
           </transitional>
           <storage_qualifier_level type="basic">
             <power_up>
@@ -1004,21 +1531,8 @@
             <op_node/>
           </storage_qualifier_level>
         </storage_qualifier_events>
-        <log>
-          <data global_temp="1" name="log: 2013/07/02 20:00:25  #0" power_up_mode="false" sample_depth="128" trigger_position="16">1110000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000001111100100000010000101001100000010000101001100000100100011100000000000000000000010110000000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010011111001000000000000110011000000000000110011000001001000111000000000000000000000101100000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000101000001100110000001000001100110000010010001110000000000000000000001011000000001000000000000000000000000000000000000000000000000000010110000000000000000000000000000000000000010100000000000111001100000000000111001100000100100011100000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000010000000101000000100001110011000000100001110011000001001000111000000000000000000000000010000100000000000000000000000000000000000000000000000000000000000100001000000000000000000000000000100001000000000000000010110000000000000010110000010010001110000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001000111100100000010000000101100000010000000101100000100100011100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000000011111001000000000001001011000000000001001011000001001000111000000000000000000000101100000000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100111110010000001000010010110000001000010010110000010010001110000000000000000000001011000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000001000000010101100000000000010101100000100100011100000000000000000000010110000000010000000000000000000000000000000000000000000000000000101100000000000000000000000000000000000000101000000100000101011000000100000101011000001001000111000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000100000001010000000000011010110000000000011010110000010010001110000000000000000000000000100001000000000000000000000000000000000000000000000000000000000001000010000000000000000000000000001000010000000010000110101100000010000110101100000100100011100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010001111001000000000000011011000000000000011011000001001000111000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000000111110010000000000000000000000000000000000000000010010001110000000000000000000001011000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001001111100100000010000000000000100010000000000000000100100010100000000000000000000010110000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000010000001000000001000000001000000000001001000101000000000000000000000101100000000100000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000001010000001000010000000010001000010000000000010010001010000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000001000000010100000000000010000000100000000010000000000100100010100000000000000000000000001000010000000000000000000000000000000000000000000000000000000000010000100000000000000000000000000010000100000000100000100000001000100000100000000001001000101000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100011110010000000000011000000010000000011000000000010010001010000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000001111100100000010000110000000100010000110000000000100100010100000000000000000000010110000000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010011111001000000000000010000001000000000010000000001001000101000000000000000000000101100000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000101000000100000010001000000100000000010010001010000000000000000000001011000000001000000000000000000000000000000000000000000000000000010110000000000000000000000000000000000000010100000000000101000000100000000101000000000100100010100000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000010000000101000000100001010000001000100001010000000001001000101000000000000000000000000010000100000000000000000000000000000000000000000000000000000000000100001000000000000000000000000000100001000000000000001100000010000000001100000000010010001010000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001000111100100000010000011000000100010000011000000000100100010100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000000011111001000000000001110000001000000001110000000001001000101000000000000000000000101100000000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100111110010000001000011100000010001000011100000000010010001010000000000000000000001011000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000001000000000100000100000000000100000000100100010100000000000000000000010110000000010000000000000000000000000000000000000000000000000000101100000000000000000000000000000000000000101000000100000001000001000100000001000000001001000101000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000100000001010000000000010010000010000000010010000000010010001010000000000000000000000000100001000000000000000000000000000000000000000000000000000000000001000010000000000000000000000000001000010000000010000100100000100010000100100000000100100010100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010001111001000000000000101000001000000000101000000001001000101000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000000111110010000001000001010000010001000001010000000010010001010000000000000000000001011000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001001111100100000000000110100000100000000110100000000100100010100000000000000000000010110000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000010100001101000001000100001101000000001001000101000000000000000000000101100000000100000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000001010000000000000110000010000000000110000000010010001010000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000001000000010100000010000001100000100010000001100000000100100010100000000000000000000000001000010000000000000000000000000000000000000000000000000000000000010000100000000000000000000000000010000100000000000001011000001000000001011000000001001000101000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100011110010000001000010110000010001000010110000000010010001010000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000001111100100000000000011100000100000000011100000000100100010100000000000000000000010110000000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010011111001000000100000111000001000100000111000000001001000101000000000000000000000101100000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000100000011110000010000000011110000000010010001010000000000000000000001011000000001000000000000000000000000000000000000000000000000000010110000000000000000000000000000000000000010100000010000111100000100010000111100000000100100010100000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000010000000101000000000000000100001000000000000100000001001000101000000000000000000000000010000100000000000000000000000000000000000000000000000000000000000100001000000000000000000000000000100001000000001000000001000010001000000001000000010010001010000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001000111100100000000000100010000100000000100010000000100100010100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000000011111001000000100001000100001000100001000100000001001000101000000000000000000000101100000000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100111110010000000000001001000010000000001001000000010010001010000000000000000000001011000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000001010000010010000100010000010010000000100100010100000000000000000000010110000000010000000000000000000000000000000000000000000000000000101100000000000000000000000000000000000000101000000000001100100001000000001100100000001001000101000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000100000001010000001000011001000010001000011001000000010010001010000000000000000000000000100001000000000000000000000000000000000000000000000000000000000001000010000000000000000000000000001000010000000000000001010000100000000001010000000100100010100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010001111001000000100000010100001000100000010100000001001000101000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000000111110010000000000010101000010000000010101000000010010001010000000000000000000001011000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001001111100100000010000101010000100010000101010000000100100010100000000000000000000010110000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000010000000110100001000000000110100000001001000101000000000000000000000101100000000100000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000001010000001000001101000010001000001101000000010010001010000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000001000000010100000000000111010000100000000111010000000100100010100000000000000000000000001000010000000000000000000000000000000000000000000000000000000000010000100000000000000000000000000010000100000000100001110100001000100001110100000001001000101000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100011110010000000000000011000010000000000011000000010010001010000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000001111100100000010000000110000100010000000110000000100100010100000000000000000000010110000000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010011111001000000000001001100001000000001001100000001001000101000000000000000000000101100000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000101000010011000010001000010011000000010010001010000000000000000000001011000000001000000000000000000000000000000000000000000000000000010110000000000000000000000000000000000000010100000000000010110000100000000010110000000100100010100000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000010000000101000000100000101100001000100000101100000001001000101000000000000000000000000010000100000000000000000000000000000000000000000000000000000000000100001000000000000000000000000000100001000000000000011011000010000000011011000000010010001010000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001000111100100000010000110110000100010000110110000000100100010100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000000011111001000000000000011100001000000000011100000001001000101000000000000000000000101100000000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100111110010000001000000111000010001000000111000000010010001010000000000000000000001011000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000001000000101110000100000000101110000000100100010100000000000000000000010110000000010000000000000000000000000000000000000000000000000000101100000000000000000000000000000000000000101000000100001011100001000100001011100000001001000101000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000100000001010000000000001111000010000000001111000000010010001010000000000000000000000000100001000000000000000000000000000000000000000000000000000000000001000010000000000000000000000000001000010000000010000011110000100010000011110000000100100010100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010001111001000000000001111100001000000001111100000001001000101000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000000111110010000001000011111000010001000011111000000010010001010000000000000000000001011000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001001111100100000000000000001000100000000000001000000100100010100000000000000000000010110000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000010100000000010001000100000000010000001001000101000000000000000000000101100000000100000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000001010000000000010000100010000000010000100000010010001010000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000001000000010100000010000100001000100010000100001000000100100010100000000000000000000000001000010000000000000000000000000000000000000000000000000000000000010000100000000000000000000000000010000100000000000000100010001000000000100010000001001000101000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100011110010000001000001000100010001000001000100000010010001010000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000001111100100000000000110001000100000000110001000000100100010100000000000000000000010110000000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010011111001000000100001100010001000100001100010000001001000101000000000000000000000101100000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000100000000100100010000000000100100000010010001010000000000000000000001011000000001000000000000000000000000000000000000000000000000000010110000000000000000000000000000000000000010100000010000001001000100010000001001000000100100010100000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000010000000101000000000001010010001000000001010010000001001000101000000000000000000000000010000100000000000000000000000000000000000000000000000000000000000100001000000000000000000000000000100001000000001000010100100010001000010100100000010010001010000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001000111100100000000000011001000100000000011001000000100100010100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000000011111001000000100000110010001000100000110010000001001000101000000000000000000000101100000000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100111110010000000000011100100010000000011100100000010010001010000000000000000000001011000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000001010000111001000100010000111001000000100100010100000000000000000000010110000000010000000000000000000000000000000000000000000000000000101100000000000000000000000000000000000000101000000000000001010001000000000001010000001001000101000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000100000001010000001000000010100010001000000010100000010010001010000000000000000000000000100001000000000000000000000000000000000000000000000000000000000001000010000000000000000000000000001000010000000000000100101000100000000100101000000100100010100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010001111001000000100001001010001000100001001010000001001000101000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000000111110010000000000001010100010000000001010100000010010001010000000000000000000001011000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001001111100100000010000010101000100010000010101000000100100010100000000000000000000010110000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000010000001101010001000000001101010000001001000101000000000000000000000101100000000100000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000001010000001000011010100010001000011010100000010010001010000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000001000000010100000000000001101000100000000001101000000100100010100000000000000000000000001000010000000000000000000000000000000000000000000000000000000000010000100000000000000000000000000010000100000000100000011010001000100000011010000001001000101000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100011110010000000000010110100010000000010110100000010010001010000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000001111100100000010000101101000100010000101101000000100100010100000000000000000000010110000000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010011111001000000000000111010001000000000111010000001001000101000000000000000000000101100000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000101000001110100010001000001110100000010010001010000000000000000000001011000000001000000000000000000000000000000000000000000000000000010110000000000000000000000000000000000000010100000000000111101000100000000111101000000100100010100000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000010000000101000000100001111010001000100001111010000001001000101000000000000000000000000010000100000000000000000000000000000000000000000000000000000000000100001000000000000000000000000000100001000000000000000001100010000000000001100000010010001010000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001000111100100000010000000011000100010000000011000000100100010100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000000011111001000000000001000110001000000001000110000001001000101000000000000000000000101100000000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100111110010000001000010001100010001000010001100000010010001010000000000000000000001011000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000001000000010011000100000000010011000000100100010100000000000000000000010110000000010000000000000000000000000000000000000000000000000000101100000000000000000000000000000000000000101000000100000100110001000100000100110000001001000101000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000100000001010000000000011001100010000000011001100000010010001010000000000000000000000000100001000000000000000000000000000000000000000000000000000000000001000010000000000000000000000000001000010000000010000110011000100010000110011000000100100010100000000000000000000001000011000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010001111001000000000000010110001000000000010110000001001000101000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000000111110010000001000000101100010001000000101100000010010001010000000000000000000001011000000000000000000000000000000000000000010000000000000000000000000000000100000000000000000000001001111100100000000000101011000100000000101011000000100100010100000000000000000000010110000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000010100001010110001000100001010110000001001000101000000000000000000000101100000000100000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000001010000000000001101100010000000001101100000010010001010000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000001000000010100000010000011011000100010000011011000000100100010100000000000000000000000001000010000000000000000000000000000000000000000000000000000000000010000100000000000000000000000000010000100000000000001110110001000000001110110000001001000101000000000000000000000010000110000000000000000000000000000000000001000000000000000000000000000000010000000000000000000000100011110010000001000011101100010001000011101100000010010001010000000000000000000000100001100000000000000000000000000000000000010000000000000000000000000000000100000000000000000000000001111100100000000000000111000100000000000111000000100100010100000000000000000000010110000000000000000000000000000000000000000100000000000000000000000000000001000000000000000000000010011111001000000100000001110001000100000001110000001001000</data>
-          <extradata>1111111111111111T111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</extradata>
-        </log>
       </trigger>
     </signal_set>
-    <position_info>
-      <single attribute="active tab" value="0"/>
-      <single attribute="data horizontal scroll position" value="0"/>
-      <single attribute="data vertical scroll position" value="0"/>
-      <single attribute="zoom level denominator" value="1"/>
-      <single attribute="zoom level numerator" value="2"/>
-      <single attribute="zoom offset denominator" value="1"/>
-      <single attribute="zoom offset numerator" value="65472"/>
-    </position_info>
   </instance>
   <mnemonics/>
   <static_plugin_mnemonics/>
@@ -1026,12 +1540,12 @@
     <single attribute="active instance" value="0"/>
     <single attribute="config widget visible" value="1"/>
     <single attribute="data log widget visible" value="1"/>
-    <single attribute="hierarchy widget height" value="147"/>
+    <single attribute="hierarchy widget height" value="165"/>
     <single attribute="hierarchy widget visible" value="1"/>
     <single attribute="instance widget visible" value="1"/>
     <single attribute="jtag widget visible" value="1"/>
-    <multi attribute="column width" size="23" value="34,34,295,74,68,70,88,88,98,98,88,88,110,101,101,101,101,101,101,101,101,107,114"/>
-    <multi attribute="frame size" size="2" value="1171,1017"/>
+    <multi attribute="column width" size="23" value="34,34,388,74,68,70,88,88,98,98,88,88,110,101,101,101,101,101,101,101,101,107,78"/>
+    <multi attribute="frame size" size="2" value="1351,1017"/>
     <multi attribute="jtag widget size" size="2" value="370,139"/>
   </global_info>
 </session>

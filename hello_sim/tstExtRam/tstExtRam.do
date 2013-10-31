@@ -37,7 +37,7 @@ add wave -group "bus_32" 					\
 						i1/iSync32_wren		\
 						i1/iSync32_ce		\
 						i1/oSync32_q		\
-						i1/oSync32_wait
+						i1/ocSync32_wait
 add wave -group "ram_16" 						\
 						i1/oAsync16_address		\
 						i1/oAsync16_byteena_n	\

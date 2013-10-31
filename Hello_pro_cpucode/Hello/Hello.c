@@ -10,14 +10,15 @@
 
 #include <stdio.h>                /* prototype declarations for I/O functions */
 //#include <LPC21xx.H>              /* LPC21xx definitions                      */
-
+#include "Hello.h"
+//static int iii;
 void busyLoop(int loop)
 {
 	volatile int iii;
 
 	iii=loop;
 	do{
-	}while(iii--);
+	}while(--iii);
 }
 #define IOPIN          (*((volatile unsigned long *) 0xD0000000))
 #define BUSY_LOOP_TIMES (10000000)/*10M about 4 sec*/
@@ -37,6 +38,17 @@ int output_str(char *str)
 /* main program */
 /****************/
 int main (void)  {                /* execution starts here                    */
+
+#if 0
+  	IOPIN=0x1;
+
+	ram_test1();
+#endif
+
+
+
+
+
   busyLoop(BUSY_LOOP_TIMES);
 #if 0
   printf ("Hello World\n");       /* the 'printf' function call               */
@@ -44,11 +56,13 @@ int main (void)  {                /* execution starts here                    */
   output_str("Hello World\n");
 #endif
   while (1) {                          /* An embedded program does not stop and       */
+#if 1  	
   	IOPIN=0x1;
   	busyLoop(BUSY_LOOP_TIMES);
 	IOPIN=0x0;
   	busyLoop(BUSY_LOOP_TIMES);
       /* ... */                       /* never returns. We use an endless loop.      */
+#endif	  
   }                                    /* Replace the dots (...) with your own code.  */
 
 }

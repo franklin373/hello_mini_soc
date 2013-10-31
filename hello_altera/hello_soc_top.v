@@ -8,13 +8,15 @@ module hello_soc_top (
    KEY_in,
 
     /*external SRAM*/
-    address_ram,
-    byteena_ram,
+    o_address_ram,
+    o_byteena_ram,
     io_ram,
-    wren_ram,
-    ce_ram,
-    oe_ram
+    o_wren_ram,
+    o_ce_ram,
+    o_oe_ram
    );
+//parameter SRAM_ADDR_WIDTH = 11;//internal ram
+parameter SRAM_ADDR_WIDTH = 19;//external ram
    
 input              clk_50m;
 input              rst_n;
@@ -24,12 +26,12 @@ output             TxD;
 output     [1:0]        LED_out;
 input              KEY_in;
 
-	output [8:0] address_ram;
-	output [1:0] byteena_ram;
+	output [SRAM_ADDR_WIDTH-1:0] o_address_ram;
+	output [1:0] o_byteena_ram;
 	inout [15:0] io_ram;
-	output wren_ram;
-	output ce_ram;
-	output oe_ram;
+	output o_wren_ram;
+	output o_ce_ram;
+	output o_oe_ram;
 
 
 wire               rst;
@@ -75,7 +77,7 @@ wire data_oe_tri;
    (// Clock in ports
     .inclk0            (clk_50m),      // IN
     // Clock out ports
-    .c0           (clk));    // OUT
+    .c1           (clk));    // OUT
 
 assign rst = ~rst_n;
 
@@ -141,9 +143,60 @@ ram u_ram (
 	     .q                 (    ram_rdata_ram                       )
 	);	
 */	
-
+/*
+module sram_sync32_async16(
+    iRst,
+    iClock,
+    //****bus signal******
+    iSync32_address,
+    iSync32_byteena,
+    iSync32_data,
+    iSync32_wren,
+    iSync32_ce,
+    oSync32_q,
+    oSync32_wait,
+    //*****ram signal*****
+    oAsync16_address,
+    oAsync16_byteena_n,
+    oAsync16_data,
+    oAsync16_data_oe_tri,
+    oAsync16_wren_n,
+    oAsync16_ce_n,
+    oAsync16_oe_n,
+    iAsync16_q,
+    );
+*/    
 assign io_ram=( data_oe_tri? data_ram : {32{1'bZ}} );
+wire adaptor_en;//just for debug, slow beat
+defparam u_ram.ADDR_WIDTH = SRAM_ADDR_WIDTH;
+sram_sync32_async16 u_ram(
+    .iRst(rst),
+    .iClock(clk),
+    .iAdaptor_en(adaptor_en),
 
+    .iSync32_address(ram_addr[SRAM_ADDR_WIDTH-1:0]),
+    .iSync32_byteena(ram_flag),
+    .iSync32_data(ram_wdata),
+    .iSync32_wren(ram_wen),
+    .iSync32_ce(mod_sel[0]),
+    .oSync32_q(ram_rdata_ram),
+    .ocSync32_wait(wait_cpu),
+    //*****ram signal*****
+    .oAsync16_address(o_address_ram),
+    .oAsync16_byteena_n(o_byteena_ram),
+    .oAsync16_data(data_ram),
+    .oAsync16_data_oe_tri(data_oe_tri),
+    .oAsync16_wren_n(o_wren_ram),
+    .oAsync16_ce_n(o_ce_ram),
+    .oAsync16_oe_n(o_oe_ram),
+    .iAsync16_q(io_ram)
+    );
+sram_adaptor_en u_ram_adaptor_en(
+    .iRst(rst),
+    .iClock(clk),
+    .oAdaptor_en(adaptor_en)
+    );
+/*
 sram_extern_32 u_ram(
         .clock(clk),
         .rst(rst),
@@ -156,15 +209,16 @@ sram_extern_32 u_ram(
         .q_bus(ram_rdata_ram),
         .wait_bus(wait_cpu),
 
-        .address_ram(address_ram),
-        .byteena_ram(byteena_ram),
+        .address_ram(o_address_ram),
+        .byteena_ram(o_byteena_ram),
         .data_ram(data_ram),
         .data_oe_tri(data_oe_tri),
-        .wren_ram(wren_ram),
-        .ce_ram(ce_ram),
-        .oe_ram(oe_ram),
+        .wren_ram(o_wren_ram),
+        .ce_ram(o_ce_ram),
+        .oe_ram(o_oe_ram),
         .q_ram(io_ram)
     );
+*/    
 /*	
 module sram_extern_32 (
 	clock,

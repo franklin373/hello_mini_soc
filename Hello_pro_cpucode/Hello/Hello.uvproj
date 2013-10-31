@@ -420,6 +420,16 @@
               <FileType>1</FileType>
               <FilePath>.\Hello.c</FilePath>
             </File>
+            <File>
+              <FileName>ram_chk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ram_chk.c</FilePath>
+            </File>
+            <File>
+              <FileName>test1.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\test1.s</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -76,6 +76,7 @@ reg rst_n;
 sram_sync32_async16 i1 (
     .iClock(clk_50m),
     .iRst(!rst_n),
+    .iAdaptor_en(1'b1),
 
     .iSync32_address(address_bus),
     .iSync32_byteena(byteena_bus),
@@ -83,7 +84,7 @@ sram_sync32_async16 i1 (
     .iSync32_wren(wren_bus),
     .iSync32_ce(ce_bus),
     .oSync32_q(q_bus),
-    .oSync32_wait(wait_bus),
+    .ocSync32_wait(wait_bus),
 
     .oAsync16_address(address_ram),
     .oAsync16_byteena_n(byteena_ram),
@@ -123,7 +124,7 @@ begin:Loop
 	for(i=0;i==0||wait_bus_posedge;i=i+1) begin
         address_bus=9'b100;
         byteena_bus=4'b1;
-        data_bus=32'b1;
+        data_bus=32'hFFFFFFFF;
         wren_bus=1'b1;
         ce_bus=1'b1;
         #10
@@ -253,12 +254,12 @@ $display("Running testbench");
         #10;
     end
 */
-//    single_word_write_low();
+    single_word_write_low();
 //    single_word_write_high();
 //    double_word_write();
 //    single_word_read_low();
 //    single_word_read_high();
-    double_word_read();
+//    double_word_read();
     address_bus=9'b0;
     byteena_bus=4'b0;
     data_bus=32'b0;

@@ -12,9 +12,11 @@
 *.summary
 *.rpt
 *.done
+*.lst
 wlft*
 Obj/
 work/
+rtl_work/
 db/
 incremental_db/
 simulation/
